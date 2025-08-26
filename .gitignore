@@ -5,3 +5,7 @@ Stop tracking zip archives; ignore *.zip
 src/config/firebase.json
 
 src/config/firebase.json
+
+# Secrets
+src/keys/*.json
+
