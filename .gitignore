@@ -9,3 +9,8 @@ src/config/firebase.json
 # Secrets
 src/keys/*.json
 
+
+# Ignore archives
+*.zip
+server.zip
+
