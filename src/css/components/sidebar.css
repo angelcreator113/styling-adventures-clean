@@ -1,0 +1,131 @@
+/* src/css/components/sidebar.css
+   Shared sidebar visuals for Fan/Creator/Admin.
+   Works with the app-shell layout classes. */
+
+.sidebar-nav {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  background: #fff;
+}
+
+.sidebar-nav.is-collapsed .sidebar-greeting,
+.sidebar-nav.is-collapsed .sidebar-link__label {
+  display: none; /* keep bullets visible when collapsed */
+}
+
+.sidebar-section {
+  padding: 8px 6px 4px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.sidebar-greeting {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* List reset */
+.sidebar-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+
+/* Links */
+.sidebar-link {
+  display: grid;
+  grid-template-columns: 14px 1fr;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  color: #111827;
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+
+.sidebar-link:hover {
+  background: #f8fafc;
+  border-color: #eef2f7;
+}
+
+.sidebar-link.is-active {
+  background: #eef2ff;        /* light indigo */
+  border-color: #c7d2fe;
+  color: #1e40af;
+  font-weight: 600;
+}
+
+.sidebar-link__bullet {
+  text-align: center;
+  width: 14px;
+  opacity: 0.6;
+}
+
+/* Collapsed tweaks (width handled by .app-sidebar) */
+.sidebar-nav.is-collapsed .sidebar-link {
+  grid-template-columns: 14px 0;
+  justify-items: center;
+  padding: 8px 6px;
+}
+/* --- Modern sidebar look --- */
+.sidebar-nav {
+  padding: 12px;
+  border-right: 1px solid var(--border, #eee);
+  background: var(--sidebar-bg, #fff);
+}
+
+.sidebar-nav.is-collapsed {
+  min-width: 60px;
+}
+
+.sidebar-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: inherit;
+  text-decoration: none;
+  transition: background .18s ease, color .18s ease, transform .02s ease;
+}
+
+.sidebar-link:hover {
+  background: rgba(0,0,0,.04);
+}
+
+.sidebar-link.is-active {
+  background: rgba(124, 58, 237, .12); /* purple-600 @ 12% */
+  color: #6d28d9; /* purple-700 */
+  font-weight: 600;
+}
+
+.sidebar-section-title {
+  font-size: 12px;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: #9aa1a9;
+  margin: 14px 10px 8px;
+}
+
+.sidebar-sep {
+  height: 1px;
+  background: var(--border, #eee);
+  margin: 10px 0;
+}
+
+/* when collapsed, hide labels but keep icons centered */
+.sidebar-nav.is-collapsed .sidebar-link span.sidebar-label {
+  display: none;
+}
+.sidebar-nav.is-collapsed .sidebar-link {
+  justify-content: center;
+}

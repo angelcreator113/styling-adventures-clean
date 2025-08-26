@@ -1,0 +1,44 @@
+.profile-wrap { display: grid; gap: 16px; }
+.profile-header { display: grid; gap: 4px; }
+.profile-title { margin: 0; font-weight: 800; color: var(--ink); }
+.profile-sub { color: var(--ink-muted); }
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 16px;
+}
+@media (max-width: 900px) {
+  .profile-grid { grid-template-columns: 1fr; }
+}
+
+.card {
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+.card-title { margin: 0 0 10px; font-weight: 800; color: var(--ink); }
+
+.field { display: grid; gap: 6px; margin: 12px 0; }
+.field label { font-weight: 700; color: var(--ink); }
+.field input {
+  height: 42px; padding: 0 .9rem;
+  border-radius: 12px; border: 1px solid var(--border);
+  background: var(--surface); color: var(--ink);
+}
+.field input:focus { outline: none; box-shadow: 0 0 0 3px rgba(124,58,237,.25); }
+
+.muted { color: var(--ink-muted); font-size: .9rem; }
+
+.action-row { display: flex; align-items: center; gap: 10px; margin-top: 6px; }
+.btn.primary {
+  background: var(--accent); color: #fff; border: 0;
+  border-radius: 12px; padding: .6rem 1rem; font-weight: 800;
+  box-shadow: 0 6px 20px rgba(124,58,237,.18);
+}
+.btn.primary:hover { filter: brightness(1.05); }
+
+.save-badge { color: var(--ink-muted); font-weight: 700; }

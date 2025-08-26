@@ -1,0 +1,99 @@
+<!-- voice-panel.html -->
+<link rel="stylesheet" href="css/theme.css" />
+<link rel="stylesheet" href="css/panel.css" />
+<link rel="stylesheet" href="css/forms-and-filters.css" />
+<link rel="stylesheet" href="css/upload-form.css" />
+<link rel="stylesheet" href="css/category-manager.css" />
+<link rel="stylesheet" href="css/closet-panel.css" />
+<link rel="stylesheet" href="css/utility.css" />
+
+<main>
+  <section id="voice-panel" class="panel upload-layout" role="tabpanel" aria-labelledby="voice-tab">
+    <!-- Upload Panel -->
+    <section class="panel panel-card upload-card" aria-labelledby="voice-panel-heading">
+      <h2 id="voice-panel-heading" class="text-purple-dark">Voice Upload</h2>
+
+      <form id="voice-upload-form" class="upload-panel flex-col gap-1rem">
+        <div class="form-group">
+          <label for="voice-file-input" class="visually-hidden">Upload voice audio</label>
+          <div id="voice-drop-area" class="drop-area text-center cursor-pointer border-dashed border-purple-light p-2rem rounded-xl">
+            <img src="assets/icons/upload-icon.svg" alt="Upload icon" width="32" height="32" />
+            <input type="file" id="voice-file-input" accept="audio/*" class="hidden" />
+            <p class="text-purple-accent">Drop or choose an audio file…</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>
+            <input type="checkbox" id="voice-is-public" checked />
+            Make public
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label for="voice-category">Category</label>
+          <select id="voice-category" class="smart-dropdown" required></select>
+        </div>
+
+        <div class="form-group">
+          <label for="voice-subcategory">Subcategory</label>
+          <select id="voice-subcategory" class="smart-dropdown"></select>
+        </div>
+
+        <div class="form-group">
+          <label for="voice-subsubcategory">Sub-subcategory</label>
+          <select id="voice-subsubcategory" class="smart-dropdown"></select>
+        </div>
+
+        <div class="form-group">
+          <label for="voice-title">Title (optional)</label>
+          <input id="voice-title" type="text" placeholder="e.g. Soft Life – Morning Affirmations" />
+        </div>
+
+        <div class="form-group">
+          <label for="voice-notes">Notes (optional)</label>
+          <textarea id="voice-notes" rows="3" placeholder="Context, mood, rights, etc."></textarea>
+        </div>
+
+        <button type="submit" class="primary-btn bg-purple-accent text-white border-none px-1_5rem py-0_75rem rounded-md">
+          Upload
+        </button>
+      </form>
+    </section>
+
+    <section class="panel" id="panel-voice" data-panel="voice">
+      <h2>🎤 Voice</h2>
+      <p>Voice panel content goes here.</p>
+    </section>
+
+
+    <!-- Dashboard Panel -->
+    <section class="panel panel-card dashboard-card" aria-labelledby="voice-dashboard-heading">
+      <h2 id="voice-dashboard-heading" class="text-purple-dark">Voice Dashboard</h2>
+      <div id="voice-dashboard-root" class="dashboard-grid"></div>
+    </section>
+
+    <!-- Category Manager -->
+    <section class="panel panel-card category-card" aria-labelledby="voice-categories-heading">
+      <h3 id="voice-categories-heading" class="text-purple-dark">Manage Categories</h3>
+      <div class="categories-grid flex-col gap-1rem">
+        <div class="form-group">
+          <label for="voice-cat-input">Main Category</label>
+          <input id="voice-cat-input" type="text" class="cat-input" placeholder="e.g. Affirmations" />
+        </div>
+        <div class="form-group">
+          <label for="voice-subcat-input">Subcategory</label>
+          <input id="voice-subcat-input" type="text" class="subcat-input" placeholder="e.g. Morning" />
+        </div>
+        <div class="form-group">
+          <label for="voice-subsubcat-input">Sub-subcategory</label>
+          <input id="voice-subsubcat-input" type="text" class="subsubcat-input" placeholder="e.g. Gentle Tempo" />
+        </div>
+      </div>
+      <div class="cat-actions mt-1rem flex gap-0_5rem">
+        <button class="add-cat-btn bg-purple-accent text-white border-none px-1rem py-0_5rem rounded-md">➕ Add</button>
+        <button class="delete-cat-btn bg-purple-light text-purple-dark border-none px-1rem py-0_5rem rounded-md">🗑️ Delete</button>
+      </div>
+    </section>
+  </section>
+</main>

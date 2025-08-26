@@ -1,0 +1,370 @@
+/* =========================================================================
+   Topbar (scoped)
+   ========================================================================= */
+
+:root {
+  --topbar-h: 64px;
+  --tb-gap: 12px;
+  --tb-ico: 20px;
+}
+
+/* Bar */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  height: var(--topbar-h);
+  background: var(--panel);
+  background-image: linear-gradient(
+    to bottom,
+    color-mix(in oklab, var(--panel) 100%, transparent) 0%,
+    color-mix(in oklab, var(--panel) 92%, transparent) 100%
+  );
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-1, 0 1px 2px rgba(0,0,0,.06), 0 2px 8px rgba(0,0,0,.06));
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  isolation: isolate;
+}
+
+/* Scoped container so global .container doesn't inflate the bar */
+.topbar .container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--gap-lg, 20px);
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* Row: [search/status] | [actions] */
+.topbar__inner {
+  height: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto; /* anti-overflow */
+  align-items: center;
+  gap: var(--tb-gap);
+  width: 100%;
+}
+
+/* Clusters */
+.topbar__search { display: flex; align-items: center; min-width: 0; }
+.topbar__actions { display: flex; align-items: center; gap: 12px; flex-wrap: nowrap; min-width: 0; }
+.topbar__actions > * { flex: 0 0 auto; }
+
+/* Groups with subtle dividers */
+.topbar__group {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding-left: 10px; position: relative;
+}
+.topbar__group + .topbar__group { margin-left: 6px; }
+.topbar__group + .topbar__group::before {
+  content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+  width: 1px; height: 22px; background: color-mix(in oklab, var(--border) 84%, transparent);
+  border-radius: 1px;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute; left: 12px; top: -100px;
+  background: var(--panel); border: 1px solid var(--border);
+  padding: 6px 10px; border-radius: 8px; box-shadow: var(--shadow-1);
+}
+.skip-link:focus { top: 8px; z-index: 100; }
+
+/* Compact state */
+.topbar.is-compact { height: calc(var(--topbar-h) - 6px); transition: height .18s ease; }
+.topbar.is-compact .icon-btn,
+.topbar.is-compact .tb-btn { height: 36px; min-width: 36px; }
+.topbar.is-compact .avatar-btn { width: 36px; height: 36px; }
+
+/* Search */
+.searchbar {
+  position: relative; display: flex; align-items: center;
+  height: 40px; max-width: min(640px, 100%);
+  width: clamp(280px, 48vw, 720px);
+  border: 1px solid var(--border); border-radius: 999px;
+  background: var(--bg-soft);
+  padding-left: 36px; padding-right: 10px;
+  transition: box-shadow .2s ease, border-color .2s ease, background .2s ease, width .2s ease;
+}
+.searchbar .search-ico {
+  position: absolute; left: 12px; display: inline-flex; align-items: center; justify-content: center;
+  color: var(--text-dim);
+}
+.searchbar input[type="search"] {
+  flex: 1; min-width: 0; border: 0; background: transparent; color: var(--text); padding: 0; height: 100%;
+}
+.searchbar input::placeholder { color: var(--text-dim); letter-spacing: .2px; }
+.searchbar .clear-btn { background: transparent; border: 0; color: var(--text-dim); font-size: 18px; line-height: 1; cursor: pointer; }
+.searchbar.is-pending { opacity: .7; }
+.searchbar .spinner {
+  width: 14px; height: 14px; border-radius: 50%;
+  border: 2px solid var(--border); border-top-color: var(--brand);
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (min-width: 1200px){ .searchbar { max-width: 720px; } }
+
+/* Status pill */
+.status-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 36px; padding: 0 10px;
+  background: var(--bg-soft); border: 1px solid var(--border);
+  border-radius: 999px;
+}
+.status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+.status-track { position: relative; width: 120px; height: 6px; border-radius: 999px; background: var(--border); }
+.status-bar { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 999px; background: var(--accent); }
+
+/* Buttons */
+.icon-btn, .tb-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 40px; min-width: 40px; padding: 0 12px; gap: 8px;
+  border: 1px solid var(--border); border-radius: 10px; background: var(--bg);
+  transition: background .15s ease, box-shadow .15s ease, transform .05s ease;
+}
+.icon-btn:hover, .tb-btn:hover { background: var(--bg-soft); }
+.icon-btn:active, .tb-btn:active { transform: translateY(1px) scale(.99); }
+.icon-btn:focus-visible, .tb-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.icon-btn svg { width: 18px; height: 18px; }
+
+.tb-btn.primary {
+  background: var(--brand); color: #fff; border-color: color-mix(in oklab, var(--brand) 90%, #000);
+  box-shadow: 0 4px 14px color-mix(in oklab, var(--brand) 20%, transparent);
+}
+.tb-btn.primary:is(:hover, :focus-visible) { box-shadow: 0 6px 22px color-mix(in oklab, var(--brand) 26%, transparent); }
+.tb-btn.primary:active { box-shadow: 0 2px 8px color-mix(in oklab, var(--brand) 16%, transparent); }
+
+.avatar-btn {
+  width: 40px; height: 40px; border-radius: 999px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--bg-soft); border: 1px solid var(--border);
+  font-weight: 700; color: var(--text);
+}
+.avatar-btn svg { width: 18px; height: 18px; }
+
+/* Menus */
+.menu-anchor { position: relative; }
+.menu-anchor > .menu {
+  position: absolute; right: 0; top: calc(100% + 6px);
+  min-width: 220px; padding: 8px;
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 12px; box-shadow: var(--shadow-2);
+}
+
+/* Breadcrumbs */
+.crumbs {
+  max-width: clamp(160px, 28vw, 420px);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  color: var(--text-dim); font-weight: 600;
+}
+.crumb a { color: inherit; text-decoration: none; }
+.crumb a:hover { text-decoration: underline; }
+.crumb-sep { opacity: .6; }
+@media (max-width: 900px){ .crumbs { display: none; } }
+
+/* Brand chip (optional) */
+.brand-chip {
+  display:inline-flex; align-items:center; gap:8px;
+  height: 36px; padding: 0 10px;
+  border:1px solid var(--border); border-radius: 8px; background: var(--bg);
+}
+.brand-chip img { width:20px; height:20px; border-radius:6px; }
+.brand-name { font-weight:700; color: var(--text); }
+@media (max-width: 900px){ .brand-name{ display:none; } }
+
+/* Mobile helpers */
+.show-on-mobile { display: none; }
+@media (max-width: 768px){
+  .show-on-mobile { display: inline-flex; }
+  /* hide full search on very small widths; mobile sheet will show instead */
+  .topbar__search { display: none; }
+}
+
+/* Mobile search sheet animation */
+.mobile-search {
+  display: block;
+  padding: 8px var(--gap-lg, 20px);
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  transform-origin: top center;
+  animation: tb-slide-down .18s ease-out;
+}
+
+/* Keep anchor targets from hiding under the bar */
+.app-main { scroll-margin-top: calc(var(--topbar-h) + 8px); }
+
+/* Scrim + body lock for mobile drawer */
+.app-shell[data-sidebar="open"]::after {
+  content: ""; position: fixed; inset: var(--topbar-h,56px) 0 0 0;
+  background: rgba(0,0,0,.35); z-index: 59;
+}
+.body-lock { overflow: hidden; }
+/* 3-col: brand | center search | actions */
+.topbar__inner.topbar--3col {
+  grid-template-columns: auto minmax(420px, 1fr) auto;
+}
+.topbar__search { justify-self: center; }
+.topbar__brand  { justify-self: start; }
+/* --- 3-column variant used by Topbar.jsx -------------------------------- */
+.topbar--3col {
+  grid-template-columns: auto 1fr auto; /* [brand] | [center] | [actions] */
+}
+.topbar__brand { min-width: 0; }
+.topbar__center {
+  display: flex;
+  align-items: center;
+  justify-content: center;   /* center the search/status */
+}
+.topbar__center .searchbar { width: 100%; max-width: 720px; }
+
+/* On smaller screens hide the brand and left-align the search */
+@media (max-width: 900px) {
+  .topbar--3col { grid-template-columns: 1fr auto; }
+  .topbar__brand { display: none; }
+  .topbar__center { justify-content: flex-start; }
+}
+/* in src/css/components/topbar.css */
+.topbar--balanced { grid-template-columns: auto 1fr auto; }
+.topbar__left { display:flex; align-items:center; gap:12px; min-width:0; }
+.topbar__center { display:flex; align-items:center; justify-content:center; min-width:0; }
+.topbar__actions { display:flex; align-items:center; gap:12px; }
+.topbar__center .searchbar { width: clamp(280px, 52vw, 720px); }
+/* === 2-col layout (center | actions) =============================== */
+.topbar--2col { grid-template-columns: 1fr auto; }
+.topbar__center { display:flex; align-items:center; justify-content:center; min-width:0; }
+
+/* Center search width */
+.topbar__center .searchbar { width: clamp(280px, 52vw, 720px); }
+
+/* Compact: tighten height a bit more */
+.topbar.is-compact {
+  /* was var(--topbar-h) - 6px; tighten more */
+  height: calc(var(--topbar-h, 56px) - 10px);
+  transition: height .18s ease;
+}
+
+/* Compact button sizing */
+.topbar.is-compact .icon-btn,
+.topbar.is-compact .tb-btn { height: 34px; min-width: 34px; }
+.topbar.is-compact .avatar-btn { width: 34px; height: 34px; }
+
+/* Search pill sizing (default + compact) */
+.topbar .searchbar { height: 40px; border-radius: 9999px; }
+.topbar.is-compact .searchbar { height: 36px; }
+
+/* Keep the subtle focus glow */
+.topbar .searchbar:focus-within {
+  background: var(--bg);
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--focus) 22%, transparent);
+}
+/* --- Balanced 3-area grid (left | center | right) ----------------------- */
+.topbar--3areas {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) minmax(360px, 720px) minmax(220px, 1fr);
+  align-items: center;
+  gap: var(--tb-gap, 12px);
+}
+.topbar__left  { display: flex; align-items: center; gap: 10px; }
+.topbar__center{ justify-self: center; width: 100%; }
+.topbar__actions{ display: inline-flex; align-items: center; gap: 12px; justify-self: end; }
+
+/* Compact topbar: tighten a bit more and scale controls slightly */
+.topbar.is-compact { height: calc(var(--topbar-h, 56px) - 10px); }
+.topbar.is-compact .icon-btn,
+.topbar.is-compact .tb-btn { height: 34px; min-width: 34px; }
+.topbar.is-compact .avatar-btn { width: 34px; height: 34px; }
+.topbar.is-compact .searchbar { height: 36px; }
+
+/* Keep the pill + glow on focus (already present) – width centered nicely */
+.topbar__center .searchbar { margin-inline: auto; }
+
+/* Ensure menus are anchored (and support old .dropdown markup too) */
+.menu-anchor { position: relative; }
+.menu-anchor > .menu,
+.menu-anchor > .dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  min-width: 220px;
+  padding: 8px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-2);
+  z-index: 1100;
+}
+.menu-anchor .menu-item,
+.menu-anchor .dropdown-item {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: var(--text);
+  text-decoration: none;
+}
+.menu-anchor .menu-item:hover,
+.menu-anchor .dropdown-item:hover {
+  background: var(--bg-soft);
+}
+
+/* ========================================================================
+   APPENDED: 3-col balanced header + compact sizing + polished menus
+   (Overrides take precedence because they appear later)
+   ======================================================================== */
+
+/* 3-col balanced header */
+.topbar--3col {
+  display: grid;
+  grid-template-columns: 1fr minmax(420px, 760px) 1fr;
+  align-items: center;
+  gap: var(--tb-gap, 12px);
+}
+.topbar__left  { justify-self: start; display: flex; align-items: center; gap: 10px; min-width: 0; }
+.topbar__center{ justify-self: center; min-width: 0; }
+.topbar__right { justify-self: end; display: inline-flex; align-items: center; gap: 12px; }
+
+/* Compact: shrink controls a touch more on scroll */
+.topbar.is-compact { height: calc(var(--topbar-h, 64px) - 8px); }
+.topbar.is-compact .icon-btn,
+.topbar.is-compact .tb-btn { height: 34px; min-width: 34px; }
+.topbar.is-compact .avatar-btn { width: 34px; height: 34px; }
+.topbar.is-compact .icon-btn svg,
+.topbar.is-compact .avatar-btn svg { width: 16px; height: 16px; }
+.topbar.is-compact .searchbar { height: 36px; }
+
+/* Polished dropdown menus (z-index + animation + spacing) */
+.menu-anchor { position: relative; }
+.menu-anchor > .menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  min-width: 240px;
+  padding: 8px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-2, 0 8px 24px rgba(0,0,0,.12));
+  z-index: 1200; /* sit above hero */
+  animation: tb-pop .14s ease-out;
+}
+.menu-item {
+  display: flex; align-items: center;
+  gap: 10px; padding: 10px 12px;
+  border-radius: 10px; color: var(--text);
+  text-decoration: none; cursor: pointer;
+}
+.menu-item:hover { background: var(--bg-soft); }
+.menu-sep { height: 1px; margin: 6px 4px; background: var(--border); border-radius: 1px; }
+.menu-item.danger { color: var(--danger, #b42318); }
+
+@keyframes tb-pop {
+  from { opacity: 0; transform: translateY(-4px) scale(.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Breadcrumb tone + truncation stays consistent on the left area */
+.topbar__left .crumbs {
+  max-width: clamp(200px, 32vw, 480px);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  color: var(--text-dim); font-weight: 600;
+}

@@ -1,0 +1,56 @@
+{
+  "name": "styling-adventures-admin",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+
+    "server": "nodemon --watch server.js --ext js,json --exec node server.js",
+    "fullstack": "concurrently \"npm run server\" \"npm run dev\"",
+
+    "deploy:rules": "firebase deploy --only firestore:rules,storage",
+
+    "users:list": "node -r dotenv/config ./src/scripts/list-users.js",
+    "smoke:storage": "node -r dotenv/config ./src/scripts/gcs-storage-smoke.js",
+    "smoke:storage:debug": "node --trace-uncaught --trace-warnings -r dotenv/config ./src/scripts/gcs-storage-smoke.js",
+    "smoke:upload": "node -r dotenv/config ./src/scripts/gcs-upload-canary.js",
+    "storage:set-cors": "node -r dotenv/config ./src/scripts/gcs-set-cors.js",
+    "doctor": "node -r dotenv/config ./src/scripts/doctor.js",
+
+    "seed:admin": "node -r dotenv/config ./src/scripts/seed-admin.js",
+    "set:role": "node -r dotenv/config ./src/scripts/set-role.js",
+
+    "seed:fan": "node -r dotenv/config ./src/scripts/seed-fan.js",
+    "seed:panels": "node -r dotenv/config ./src/scripts/seed-panels.js",
+    "seed:all": "npm run seed:admin && npm run seed:panels && node -e \"console.log('Now run: npm run seed:fan -- <uid-or-email>')\"",
+
+    "migrate:closet": "node -r dotenv/config ./src/scripts/migrate-closet.js",
+    "scan:data": "node -r dotenv/config ./src/scripts/scan-data.js"
+  },
+  "dependencies": {
+    "@google-cloud/storage": "^7.16.0",
+    "axios": "^1.11.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^4.21.2",
+    "firebase": "^12.1.0",
+    "firebase-admin": "^13.4.0",
+    "lucide-react": "0.541.0",
+    "multer": "^2.0.2",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-hot-toast": "^2.5.2",
+    "react-router-dom": "^7.7.1",
+    "recharts": "^3.1.2",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.7.0",
+    "concurrently": "^9.0.1",
+    "nodemon": "^3.1.10",
+    "vite": "^7.0.6"
+  }
+}

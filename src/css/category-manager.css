@@ -1,0 +1,69 @@
+/* category-manager.css */
+
+/* Category Panel Container */
+#category-panel {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  margin-bottom: 2rem;
+}
+
+/* Dropdown styling */
+.category-select,
+.subcategory-select {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+/* Add / Remove Buttons */
+.category-btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.category-btn:hover {
+  background-color: #388E3C;
+}
+
+/* Category List Display */
+.category-list {
+  margin-top: 1rem;
+}
+
+.category-list li {
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.25rem;
+  border-radius: 6px;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category-list li button {
+  background: none;
+  border: none;
+  color: #e53935;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.category-list li button:hover {
+  text-decoration: underline;
+}

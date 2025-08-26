@@ -1,0 +1,188 @@
+/* ===============================================
+   src/css/layout/space.css — Upgraded Styles for Creator Space UI
+   =============================================== */
+
+.space-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 420px) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+  margin-top: 12px;
+  min-width: 0;
+}
+
+.space-aside {
+  position: sticky;
+  top: 88px;
+  min-width: 0;
+  align-self: start;
+}
+
+.space-main {
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .space-layout {
+    grid-template-columns: 1fr;
+  }
+  .space-aside {
+    position: static;
+  }
+}
+
+.space-toolbar {
+  display: grid;
+  grid-template-columns: auto auto 1fr auto auto;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.pill-row {
+  display: flex;
+  gap: 8px;
+}
+
+.pill {
+  padding: 4px 10px;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.pill.is-active {
+  background: #111827;
+  color: #fff;
+  border-color: #111827;
+}
+
+.select {
+  font-size: 13px;
+  padding: 4px 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background-color: #fff;
+}
+
+.dashboard-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.space-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+  align-items: start;
+  margin-top: 8px;
+}
+
+.space-card {
+  padding: 8px;
+  border-radius: 12px;
+  border: 1px solid #eee;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  position: relative;
+  transition: box-shadow 0.2s;
+}
+
+.space-card:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.space-card.is-selected {
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 2px #c4b5fd;
+}
+
+.input__field {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  width: 100%;
+  font-size: 14px;
+}
+
+.btn {
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn:hover:not(:disabled) {
+  background: #e5e7eb;
+}
+
+.btn.primary {
+  background: #7c3aed;
+  color: white;
+  border-color: #7c3aed;
+}
+
+.btn.primary:hover:not(:disabled) {
+  background: #6d28d9;
+}
+
+.btn.danger {
+  background: #fee2e2;
+  color: #b91c1c;
+  border-color: #fecaca;
+}
+
+.btn.danger:hover:not(:disabled) {
+  background: #fca5a5;
+}
+
+.btn.sm {
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+.input__label {
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.index-warning {
+  background: #fff7e6;
+}
+
+.empty-space {
+  text-align: center;
+  padding: 16px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.count-label {
+  font-size: 13px;
+}
+
+.sort-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bulk-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.muted {
+  color: #6b7280;
+  font-size: 13px;
+}

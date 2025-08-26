@@ -1,0 +1,106 @@
+[debug] [2025-08-26T04:33:01.223Z] ----------------------------------------------------------------------
+[debug] [2025-08-26T04:33:01.226Z] Command:       C:\nvm4w\nodejs\node.exe C:\nvm4w\nodejs\node_modules\firebase-tools\lib\bin\firebase.js deploy --only functions
+[debug] [2025-08-26T04:33:01.226Z] CLI Version:   14.14.0
+[debug] [2025-08-26T04:33:01.226Z] Platform:      win32
+[debug] [2025-08-26T04:33:01.227Z] Node Version:  v20.19.2
+[debug] [2025-08-26T04:33:01.227Z] Time:          Tue Aug 26 2025 00:33:01 GMT-0400 (Eastern Daylight Time)
+[debug] [2025-08-26T04:33:01.227Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-08-26T04:33:01.428Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-08-26T04:33:01.429Z] > authorizing via signed-in user (evonifoster@gmail.com)
+[debug] [2025-08-26T04:33:01.429Z] [iam] checking project styling-admin for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2025-08-26T04:33:01.430Z] Checked if tokens are valid: true, expires at: 1756186066692
+[debug] [2025-08-26T04:33:01.430Z] Checked if tokens are valid: true, expires at: 1756186066692
+[debug] [2025-08-26T04:33:01.431Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/styling-admin:testIamPermissions [none]
+[debug] [2025-08-26T04:33:01.432Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/styling-admin:testIamPermissions x-goog-quota-user=projects/styling-admin
+[debug] [2025-08-26T04:33:01.432Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/styling-admin:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2025-08-26T04:33:01.707Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/styling-admin:testIamPermissions 200
+[debug] [2025-08-26T04:33:01.708Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/styling-admin:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2025-08-26T04:33:01.709Z] Checked if tokens are valid: true, expires at: 1756186066692
+[debug] [2025-08-26T04:33:01.709Z] Checked if tokens are valid: true, expires at: 1756186066692
+[debug] [2025-08-26T04:33:01.709Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/styling-admin/serviceAccounts/styling-admin@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2025-08-26T04:33:01.710Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/styling-admin/serviceAccounts/styling-admin@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2025-08-26T04:33:01.994Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/styling-admin/serviceAccounts/styling-admin@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2025-08-26T04:33:01.994Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/styling-admin/serviceAccounts/styling-admin@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'styling-admin'...
+[info] 
+[info] i  deploying functions 
+[info] Running command: npm --prefix "$RESOURCE_DIR" ci
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint:fix --if-present
+[info] +  functions: Finished running predeploy script. 
+[debug] [2025-08-26T04:33:20.028Z] Checked if tokens are valid: true, expires at: 1756186066692
+[debug] [2025-08-26T04:33:20.028Z] Checked if tokens are valid: true, expires at: 1756186066692
+[debug] [2025-08-26T04:33:20.028Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/styling-admin [none]
+[debug] [2025-08-26T04:33:20.323Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/styling-admin 200
+[debug] [2025-08-26T04:33:20.323Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/styling-admin {"projectNumber":"390526657916","projectId":"styling-admin","lifecycleState":"ACTIVE","name":"styling-admin","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2025-07-03T02:06:59.201114Z"}
+[info] i  functions: preparing codebase default for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2025-08-26T04:33:20.326Z] Checked if tokens are valid: true, expires at: 1756186066692
+[debug] [2025-08-26T04:33:20.326Z] Checked if tokens are valid: true, expires at: 1756186066692
+[debug] [2025-08-26T04:33:20.326Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/styling-admin/adminSdkConfig [none]
+[debug] [2025-08-26T04:33:20.733Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/styling-admin/adminSdkConfig 200
+[debug] [2025-08-26T04:33:20.733Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/styling-admin/adminSdkConfig {"projectId":"styling-admin","storageBucket":"styling-admin.firebasestorage.app"}
+[debug] [2025-08-26T04:33:20.734Z] Checked if tokens are valid: true, expires at: 1756186066692
+[debug] [2025-08-26T04:33:20.734Z] Checked if tokens are valid: true, expires at: 1756186066692
+[debug] [2025-08-26T04:33:20.734Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/styling-admin/configs [none]
+[debug] [2025-08-26T04:33:20.943Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/styling-admin/configs 200
+[debug] [2025-08-26T04:33:20.943Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/styling-admin/configs {}
+[debug] [2025-08-26T04:33:20.945Z] Validating nodejs source
+[debug] [2025-08-26T04:33:21.898Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "private": true,
+  "main": "index.js",
+  "type": "commonjs",
+  "engines": {
+    "node": "20"
+  },
+  "scripts": {
+    "lint": "eslint --ext .js . --config .eslintrc.cjs",
+    "lint:fix": "eslint . --ext .js --config .eslintrc.cjs --fix",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "dependencies": {
+    "axios": "^1.11.0",
+    "firebase-admin": "^12.6.0",
+    "firebase-functions": "^6.0.1",
+    "form-data": "^4.0.4"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-google": "^0.14.0",
+    "firebase-functions-test": "^3.1.0"
+  }
+}
+[debug] [2025-08-26T04:33:21.898Z] Building nodejs source
+[info] i  functions: Loading and analyzing source code for codebase default to determine what to deploy 
+[debug] [2025-08-26T04:33:21.899Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-08-26T04:33:21.908Z] Found firebase-functions binary at 'C:\Users\12483\Desktop\styling-adventures-admin\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8885
+
+[debug] [2025-08-26T04:33:29.303Z] Got response from /__/functions.yaml {"endpoints":{"setUserRole":{"platform":"gcfv1","labels":{},"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"region":["us-central1"],"callableTrigger":{},"entryPoint":"setUserRole"},"removeBgPro":{"platform":"gcfv1","labels":{},"availableMemoryMb":2048,"timeoutSeconds":60,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"region":["us-central1"],"secretEnvironmentVariables":[{"key":"REMOVER_KEY"}],"callableTrigger":{},"entryPoint":"removeBgPro"},"onBoardItemCreate":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"region":["us-central1"],"eventTrigger":{"eventType":"providers/cloud.firestore/eventTypes/document.create","eventFilters":{"resource":"projects/styling-admin/databases/(default)/documents/users/{uid}/boards/{boardId}/items/{itemId}"},"retry":false},"labels":{},"entryPoint":"onBoardItemCreate"},"onBoardItemDelete":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"region":["us-central1"],"eventTrigger":{"eventType":"providers/cloud.firestore/eventTypes/document.delete","eventFilters":{"resource":"projects/styling-admin/databases/(default)/documents/users/{uid}/boards/{boardId}/items/{itemId}"},"retry":false},"labels":{},"entryPoint":"onBoardItemDelete"},"boardsDaily":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"region":["us-central1"],"httpsTrigger":{},"entryPoint":"boardsDaily"},"boardsTrackEvent":{"platform":"gcfv1","labels":{},"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"region":["us-central1"],"callableTrigger":{},"entryPoint":"boardsTrackEvent"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[info] i  extensions: ensuring required API firebaseextensions.googleapis.com is enabled... 
+[debug] [2025-08-26T04:33:33.375Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-08-26T04:33:33.375Z] > authorizing via signed-in user (evonifoster@gmail.com)
+[debug] [2025-08-26T04:33:33.375Z] [iam] checking project styling-admin for permissions ["firebase.projects.get","firebaseextensions.instances.list"]
+[debug] [2025-08-26T04:33:33.376Z] Checked if tokens are valid: true, expires at: 1756186066692
+[debug] [2025-08-26T04:33:33.376Z] Checked if tokens are valid: true, expires at: 1756186066692
+[debug] [2025-08-26T04:33:33.376Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/styling-admin:testIamPermissions [none]
+[debug] [2025-08-26T04:33:33.376Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/styling-admin:testIamPermissions x-goog-quota-user=projects/styling-admin
+[debug] [2025-08-26T04:33:33.377Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/styling-admin:testIamPermissions {"permissions":["firebase.projects.get","firebaseextensions.instances.list"]}
+[debug] [2025-08-26T04:33:33.519Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/styling-admin:testIamPermissions 200
+[debug] [2025-08-26T04:33:33.519Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/styling-admin:testIamPermissions {"permissions":["firebase.projects.get","firebaseextensions.instances.list"]}
+[debug] [2025-08-26T04:33:33.520Z] Checked if tokens are valid: true, expires at: 1756186066692
+[debug] [2025-08-26T04:33:33.520Z] Checked if tokens are valid: true, expires at: 1756186066692
+[debug] [2025-08-26T04:33:33.522Z] >>> [apiv2][query] GET https://firebaseextensions.googleapis.com/v1beta/projects/styling-admin/instances pageSize=100&pageToken=
+[debug] [2025-08-26T04:33:33.943Z] <<< [apiv2][status] GET https://firebaseextensions.googleapis.com/v1beta/projects/styling-admin/instances 200
+[debug] [2025-08-26T04:33:33.943Z] <<< [apiv2][body] GET https://firebaseextensions.googleapis.com/v1beta/projects/styling-admin/instances {}
+[error] Error: Failed to load environment variables from .env.:
+[error] - FirebaseError Invalid dotenv file, error on lines: firebase functions:secrets:set REMOVER_KEY

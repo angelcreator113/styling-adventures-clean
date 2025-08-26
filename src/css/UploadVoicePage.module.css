@@ -1,0 +1,9 @@
+.card{background:#fff;border:1px solid #ececf3;border-radius:16px;box-shadow:0 8px 24px rgba(28,22,77,.08);padding:22px}
+.header{margin-bottom:14px}
+.title{margin:0;font-size:22px;font-weight:800;color:#3b228c}
+.uploadSections{margin-top:8px}
+.dashboardSections{margin-top:20px}
+@media (prefers-color-scheme: dark){
+  .card{background:#1f1627;border-color:#2a2034;box-shadow:0 10px 28px rgba(0,0,0,.35)}
+  .title{color:#efe7fa}
+}

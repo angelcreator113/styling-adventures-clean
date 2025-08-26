@@ -1,0 +1,66 @@
+/* 👛 onboarding.css – Welcome box styles */
+
+.onboarding-box {
+  display: none;
+  background: #fff4f9;
+  border: 2px solid #f8b9d4;
+  border-left: 8px solid #f48bb1;
+  border-radius: 12px;
+  padding: 1.5rem 1.75rem;
+  margin: 2rem 0;
+  color: #4a0033;
+  box-shadow: 0 4px 12px rgba(244, 139, 177, 0.2);
+  font-family: 'Segoe UI', sans-serif;
+  position: relative;
+  animation: onboardingFade 0.4s ease-in-out;
+}
+
+.onboarding-box h4 {
+  margin-top: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #c2185b;
+}
+
+.onboarding-box ul {
+  padding-left: 1.25rem;
+  margin: 0.75rem 0;
+}
+
+.onboarding-box li {
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.onboarding-box p {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  color: #6b004c;
+}
+
+#dismiss-onboarding {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #c2185b;
+  transition: transform 0.2s;
+}
+
+#dismiss-onboarding:hover {
+  transform: scale(1.1);
+}
+
+/* ✨ Animation */
+@keyframes onboardingFade {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  } to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

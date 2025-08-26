@@ -1,0 +1,24 @@
+/* 1) Thin outlines on everything (padding/margin stackers jump out) */
+:root.debug :where(*, *::before, *::after) {
+  outline: 1px solid rgba(0, 128, 255, 0.12);
+  outline-offset: -1px;
+}
+
+/* 2) Baseline grid (8px) to spot off-rhythm spacing) */
+:root.debug::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to bottom, rgba(0,0,0,.07) 1px, transparent 1px);
+  background-size: 100% 8px; /* change to 4/10/12 if that’s your scale */
+  z-index: 99999;
+}
+
+/* 3) Container guardrails so hero images don’t run full-bleed accidentally */
+.container {
+  max-width: 1120px;  /* pick your desktop container */
+  margin-inline: auto;
+  padding-inline: clamp(16px, 4vw, 32px);
+}

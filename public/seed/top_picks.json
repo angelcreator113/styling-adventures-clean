@@ -1,0 +1,16 @@
+[
+  {
+    "title": "Pink Silk Scarf",
+    "imageUrl": "/seed/top_picks/pink-scarf.jpg",
+    "category": "Accessories",
+    "tags": ["silk", "pink"],
+    "featured": true
+  },
+  {
+    "title": "Knit Cardigan",
+    "imageUrl": "/seed/top_picks/knit-cardigan.jpg",
+    "category": "Tops",
+    "tags": ["knit", "cozy"],
+    "featured": true
+  }
+]

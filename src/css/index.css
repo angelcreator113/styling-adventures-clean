@@ -1,0 +1,21 @@
+/* Order: tokens → base → layout → components → pages → utils → responsive → dark */
+@import "./tokens/theme.css";
+
+@import "./base/reset.css";
+@import "./base/base.css";
+
+@import "./layout/app-shell.css";
+@import "./layout/grid.css";
+
+@import "./components/topbar.css";
+@import "./components/sidebar.css";
+
+@import "./components/ui.css";
+
+@import "./pages/home.css";
+/* @import "./pages/dashboard.css";  // later if needed */
+
+@import "./utilities.css";
+@import "./responsive.css";
+@import "./dark.css"; /* optional */
+

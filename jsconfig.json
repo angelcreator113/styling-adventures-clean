@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+
+    "jsx": "react-jsx",
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "checkJs": false,
+    "types": ["vite/client"]
+  },
+  "include": [
+    "src/**/*",
+    "server.js",
+    "vite.config.js"
+, "public/seed/spotlights", "public/seed/threads"  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}

@@ -1,0 +1,8 @@
+:root[data-theme="dark"]{
+  --lavender:#16121b;
+  --surface:#201729;
+  --surface-muted:#261b32;
+  --text:#efe7fa;
+  --purple-light:#3b2b57;
+  /* keep accents */
+}

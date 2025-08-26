@@ -1,0 +1,341 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    /* ------------ helpers ------------ */
+    function isAuthed()  { return request.auth != null; }
+    function isAdmin()   { return isAuthed() && (request.auth.token.admin == true || request.auth.token.role == 'admin'); }
+    function isCreator() { return isAuthed() && (request.auth.token.role == 'creator' || request.auth.token.role == 'admin'); }
+
+    function hasVisibility(d) { return d != null && (d.visibility == 'public' || d.visibility == 'private'); }
+    function creatingOwn() { return isAuthed() && request.resource.data.uid == request.auth.uid; }
+    function isOwner()     { return isAuthed() && resource.data.uid == request.auth.uid; }
+
+    /* boards helpers usable on resource (for collectionGroup board docs) */
+    function boardDocIsPublicRead() {
+      return resource.data.visibility == 'public' || resource.data.public == true;
+    }
+    function boardDocIsOwnerRead() {
+      return isAuthed() && resource.data.uid == request.auth.uid;
+    }
+    function boardDocIsOwnerWrite() {
+      return isAuthed() && request.resource.data.uid == request.auth.uid;
+    }
+
+    /* ===== Extra helpers for Creator Spaces ===== */
+    function validStatus(s) {
+      return s == 'active' || s == 'archived' || s == null;
+    }
+    function pinUidToPath(uid) {
+      return request.resource.data.uid == uid;
+    }
+    function pinSpaceIdToPath(spaceId) {
+      return request.resource.data.spaceId == spaceId;
+    }
+    function pinCatIdToPath(catId) {
+      // allow null/empty when writing to root items; otherwise must match
+      return (catId == null && (request.resource.data.catId == null || request.resource.data.catId == ''))
+             || (catId != null && request.resource.data.catId == catId);
+    }
+    function pinFolderIdToPath(folderId) {
+      // allow null/empty when writing to category-level items; otherwise must match
+      return (folderId == null && (request.resource.data.folderId == null || request.resource.data.folderId == ''))
+             || (folderId != null && request.resource.data.folderId == folderId);
+    }
+
+    /* ------------------------------------------------------------------
+       NEW: User profile + private contact (PII) storage
+       ------------------------------------------------------------------ */
+
+    // /users/{uid} (lean, non‑PII profile)
+    match /users/{uid} {
+      // Owner or admin can read/write their own profile
+      allow read: if (isAuthed() && request.auth.uid == uid) || isAdmin();
+      allow create: if (isAuthed() && request.auth.uid == uid) || isAdmin();
+      allow update: if (isAuthed() && request.auth.uid == uid) || isAdmin();
+      allow delete: if (isAuthed() && request.auth.uid == uid) || isAdmin();
+
+      // Private PII subcollection — owner/admin only
+      match /private/{docId} {
+        allow read, update, delete: if (isAuthed() && request.auth.uid == uid) || isAdmin();
+        allow create: if (isAuthed() && request.auth.uid == uid) || isAdmin();
+
+        // Enforce required fields when creating /users/{uid}/private/contact
+        match /contact {
+          allow create: if ((isAuthed() && request.auth.uid == uid) || isAdmin())
+            // Require 'phone' (string) and an 'address' object with these keys
+            && request.resource.data.keys().hasAll(['phone','address'])
+            && request.resource.data.phone is string
+            && request.resource.data.address is map
+            && request.resource.data.address.keys().hasAll(['line1','city','region','postal','country'])
+            && request.resource.data.address.line1 is string
+            && request.resource.data.address.city  is string
+            && request.resource.data.address.region is string
+            && request.resource.data.address.postal is string
+            && request.resource.data.address.country is string;
+
+          // Updates can be partial; still owner/admin only
+          allow read, update, delete: if (isAuthed() && request.auth.uid == uid) || isAdmin();
+        }
+      }
+
+      // Settings (you already use this)
+      match /settings/{docId} {
+        allow read, create, update, delete: if isAuthed() && request.auth.uid == uid;
+      }
+    }
+
+    /* ------------ panel registry (admin-managed) ------------ */
+    match /panel_defs/{id} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    /* ------------ shared categories tree ------------ */
+    match /categories/{panel}/items/{docId} {
+      allow read: if true;
+      allow create, update, delete: if isAuthed();
+    }
+
+    /* ------------ legacy flat content ------------ */
+    match /closet/{docId} {
+      allow read: if (hasVisibility(resource.data) && resource.data.visibility == 'public') || isOwner() || isAdmin();
+      allow create: if (creatingOwn() || isAdmin()) && hasVisibility(request.resource.data);
+      allow update: if (isOwner() || isAdmin()) && hasVisibility(request.resource.data);
+      allow delete: if isOwner() || isAdmin();
+    }
+    match /voice/{docId} {
+      allow read: if true;
+      allow create: if isCreator() && creatingOwn() && hasVisibility(request.resource.data);
+      allow update, delete: if (isCreator() && isOwner()) || isAdmin();
+    }
+    match /episodes/{docId} {
+      allow read: if true;
+      allow create: if isCreator() && creatingOwn() && hasVisibility(request.resource.data);
+      allow update, delete: if (isCreator() && isOwner()) || isAdmin();
+    }
+
+    /* ------------ per-user closet ------------ */
+    match /users/{uid}/closet/{docId} {
+      allow read: if (hasVisibility(resource.data) && resource.data.visibility == 'public')
+                  || (isAuthed() && request.auth.uid == uid)
+                  || isAdmin();
+
+      allow create: if hasVisibility(request.resource.data)
+                    && request.resource.data.uid == uid
+                    && ( (isAuthed() && request.auth.uid == uid) || isAdmin() );
+
+      allow update: if hasVisibility(request.resource.data)
+                    && request.resource.data.uid == uid
+                    && ( (isAuthed() && request.auth.uid == uid) || isAdmin() );
+
+      allow delete: if (isAuthed() && request.auth.uid == uid) || isAdmin();
+    }
+
+    /* ------------ per-user categories for Toolbox ------------ */
+    match /users/{uid}/categories/{catId} {
+      allow read, create, update, delete: if isAuthed() && request.auth.uid == uid;
+    }
+
+    /* ------------ planner events ------------ */
+    match /users/{uid}/planner/events/{eventId} {
+      allow read, create, update, delete: if isAuthed() && request.auth.uid == uid;
+    }
+
+    /* ------------ public home content (admin writes) ------------ */
+    match /public/{docId}/items/{id} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    /* ------------ theme library (public read; admin write) ------------ */
+    match /themes/{themeId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+    match /public/themes/{themeId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    /* ------------ Bestie Chat ------------ */
+    match /threads/{id} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+    match /threads/{id}/replies/{rid} {
+      allow read: if true;
+      allow create: if isAuthed() && get(/databases/$(database)/documents/threads/$(id)).data.locked != true;
+      allow update, delete: if isAdmin() || (isAuthed() && request.auth.uid == resource.data.uid);
+    }
+    match /threads/{id}/reactions/{uidType} {
+      allow read: if true;
+      allow create, delete: if isAuthed()
+                            && request.auth.uid == uidType.split('_')[0]
+                            && get(/databases/$(database)/documents/threads/$(id)).data.locked != true;
+      allow update: if false;
+    }
+
+    /* =========================================================
+       Boards (direct path) + collectionGroup for /boards only
+       ========================================================= */
+    function boardIsPublic(uid, boardId) {
+      return get(/databases/$(database)/documents/users/$(uid)/boards/$(boardId)).data.visibility == 'public'
+             || get(/databases/$(database)/documents/users/$(uid)/boards/$(boardId)).data.public == true;
+    }
+
+    match /users/{uid}/boards/{boardId} {
+      allow read: if (isAuthed() && request.auth.uid == uid)
+                  || boardIsPublic(uid, boardId)
+                  || isAdmin();
+
+      allow create, update, delete: if (isAuthed() && request.auth.uid == uid) || isAdmin();
+
+      match /items/{itemId} {
+        allow read: if (isAuthed() && request.auth.uid == uid)
+                    || boardIsPublic(uid, boardId)
+                    || isAdmin();
+        allow create, update, delete: if (isAuthed() && request.auth.uid == uid) || isAdmin();
+      }
+    }
+
+    match /{anyPath=**}/boards/{boardId} {
+      allow read: if boardDocIsPublicRead() || boardDocIsOwnerRead() || isAdmin();
+      allow create, update, delete: if boardDocIsOwnerWrite() || isAdmin();
+    }
+
+    /* ------------ per-creator metrics ------------ */
+    match /users/{uid}/metrics/{coll}/{docId=**} {
+      allow read, create, update, delete: if (isAuthed() && request.auth.uid == uid) || isAdmin();
+    }
+
+    /* ------------ admin metrics ------------ */
+    match /admin/metrics/{docId=**} {
+      allow read, write: if isAdmin();
+    }
+
+    /* ------------ user settings (incl. brand, profile) ------------ */
+    match /users/{uid}/settings/{docId} {
+      allow read, create, update, delete: if isAuthed() && request.auth.uid == uid;
+    }
+
+    /* =========================================================
+       NEW: Creator Spaces (Panels) + Files schema
+       ========================================================= */
+
+    /* Creator Spaces (space doc) */
+    match /users/{uid}/spaces/{spaceId} {
+      // Read your own spaces or admin
+      allow read: if (isAuthed() && request.auth.uid == uid) || isAdmin();
+
+      // Create/update must pin uid to path
+      allow create: if (isAuthed() && request.auth.uid == uid && pinUidToPath(uid)) || isAdmin();
+      allow update: if ((isAuthed() && request.auth.uid == uid && pinUidToPath(uid)) || isAdmin());
+      allow delete: if (isAuthed() && request.auth.uid == uid) || isAdmin();
+
+      /* Root-level items under a space */
+      match /items/{itemId} {
+        allow read: if (isAuthed() && request.auth.uid == uid) || isAdmin();
+        allow create: if (isAuthed() && request.auth.uid == uid)
+                      && pinUidToPath(uid)
+                      && pinSpaceIdToPath(spaceId)
+                      && pinCatIdToPath(null)
+                      && pinFolderIdToPath(null)
+                      && validStatus(request.resource.data.status);
+        allow update: if (isAuthed() && request.auth.uid == uid)
+                      && request.resource.data.uid == uid
+                      && request.resource.data.spaceId == spaceId
+                      && validStatus(request.resource.data.status)
+                      || isAdmin();
+        allow delete: if (isAuthed() && request.auth.uid == uid) || isAdmin();
+      }
+
+      /* Categories within a space */
+      match /categories/{catId} {
+        allow read, create, update, delete: if (isAuthed() && request.auth.uid == uid) || isAdmin();
+
+        /* Items directly under a category */
+        match /items/{itemId} {
+          allow read: if (isAuthed() && request.auth.uid == uid) || isAdmin();
+          allow create: if (isAuthed() && request.auth.uid == uid)
+                        && pinUidToPath(uid)
+                        && pinSpaceIdToPath(spaceId)
+                        && pinCatIdToPath(catId)
+                        && pinFolderIdToPath(null)
+                        && validStatus(request.resource.data.status);
+          allow update: if (isAuthed() && request.auth.uid == uid)
+                        && request.resource.data.uid == uid
+                        && request.resource.data.spaceId == spaceId
+                        && request.resource.data.catId == catId
+                        && validStatus(request.resource.data.status)
+                        || isAdmin();
+          allow delete: if (isAuthed() && request.auth.uid == uid) || isAdmin();
+        }
+
+        /* Folders within a category */
+        match /folders/{folderId} {
+          allow read, create, update, delete: if (isAuthed() && request.auth.uid == uid) || isAdmin();
+
+          match /items/{itemId} {
+            allow read: if (isAuthed() && request.auth.uid == uid) || isAdmin();
+            allow create: if (isAuthed() && request.auth.uid == uid)
+                          && pinUidToPath(uid)
+                          && pinSpaceIdToPath(spaceId)
+                          && pinCatIdToPath(catId)
+                          && pinFolderIdToPath(folderId)
+                          && validStatus(request.resource.data.status);
+            allow update: if (isAuthed() && request.auth.uid == uid)
+                          && request.resource.data.uid == uid
+                          && request.resource.data.spaceId == spaceId
+                          && request.resource.data.catId == catId
+                          && request.resource.data.folderId == folderId
+                          && validStatus(request.resource.data.status)
+                          || isAdmin();
+            allow delete: if (isAuthed() && request.auth.uid == uid) || isAdmin();
+          }
+        }
+      }
+    }
+
+    // collectionGroup reads of .../items across Space paths — owner or admin only
+    match /{path=**}/items/{anyItem} {
+      allow read: if (isAuthed() && resource.data.uid == request.auth.uid) || isAdmin();
+    }
+
+    // Creator Files (legacy tiny folder schema)
+    match /users/{uid}/files/{categoryId} {
+      allow read, create, update, delete: if (isAuthed() && request.auth.uid == uid) || isAdmin();
+
+      match /folders/{folderId} {
+        allow read, create, update, delete: if (isAuthed() && request.auth.uid == uid) || isAdmin();
+
+        match /items/{itemId} {
+          allow read, create, update, delete: if (isAuthed() && request.auth.uid == uid) || isAdmin();
+        }
+      }
+    }
+
+    // Admin Content Files (global)
+    match /contentFiles/{categoryId} {
+      allow read, create, update, delete: if isAdmin();
+
+      match /folders/{folderId} {
+        allow read, create, update, delete: if isAdmin();
+
+        match /items/{itemId} {
+          allow read, create, update, delete: if isAdmin();
+        }
+      }
+    }
+
+    // Saved creator panels (metadata/layouts)
+    match /users/{uid}/panels/{panelId} {
+      allow read, create, update, delete: if isAuthed() && request.auth.uid == uid;
+    }
+
+    /* ------------ fallback: admin-only ------------ */
+    match /{document=**} {
+      allow read, write: if isAdmin();
+    }
+  }
+}

@@ -1,0 +1,108 @@
+<!-- ✅ CSS Stylesheets -->
+<link rel="stylesheet" href="css/theme.css" />
+<link rel="stylesheet" href="css/panel.css" />
+<link rel="stylesheet" href="css/forms-and-filters.css" />
+<link rel="stylesheet" href="css/upload-form.css" />
+<link rel="stylesheet" href="css/category-manager.css" />
+<link rel="stylesheet" href="css/closet-panel.css" />
+<link rel="stylesheet" href="css/utility.css" />
+
+<main>
+  <section id="closet-panel" class="panel" role="tabpanel" aria-labelledby="closet-tab">
+    <div class="panel-grid flex-wrap gap-2rem p-2rem bg-lavender">
+      
+      <!-- 🎽 Upload Card -->
+      <section class="panel panel-card flex-1 minw-300 bg-white rounded-lg p-2rem shadow-sm" aria-labelledby="closet-panel-heading">
+        <h2 id="closet-panel-heading" class="text-purple-dark">Closet Upload</h2>
+
+        <form id="closet-upload-form" class="upload-panel flex-col gap-1rem">
+          <!-- 📂 File Drop Area -->
+          <div class="form-group">
+            <label for="closet-file-input" class="visually-hidden">Upload closet image</label>
+            <div id="closet-drop-area" class="drop-area text-center cursor-pointer rounded-xl border-dashed p-2rem border-purple-light">
+              <img src="assets/icons/upload-icon.svg" alt="Upload icon" width="32" height="32" />
+              <input type="file" id="closet-file-input" accept="image/*" class="hidden" />
+              <p class="text-purple-accent">Drop or choose a file…</p>
+            </div>
+          </div>
+
+          <!-- 🌐 Public Checkbox -->
+          <div class="form-group">
+            <label>
+              <input type="checkbox" id="closet-is-public" checked />
+              Make public
+            </label>
+          </div>
+
+          <!-- 🧠 Smart Dropdowns -->
+          <div class="form-group">
+            <label for="closet-category">Category</label>
+            <select id="closet-category" class="smart-dropdown" required></select>
+          </div>
+
+          <div class="form-group">
+            <label for="closet-subcategory">Subcategory</label>
+            <select id="closet-subcategory" class="smart-dropdown"></select>
+          </div>
+
+          <div class="form-group">
+            <label for="closet-subsubcategory">Sub-subcategory</label>
+            <select id="closet-subsubcategory" class="smart-dropdown"></select>
+          </div>
+
+          <!-- ✍️ Optional Fields -->
+          <div class="form-group">
+            <label for="closet-title">Title (optional)</label>
+            <input id="closet-title" type="text" placeholder="e.g. Soft Knit Cardigan" />
+          </div>
+
+          <div class="form-group">
+            <label for="closet-notes">Notes (optional)</label>
+            <textarea id="closet-notes" rows="3" placeholder="Material, usage notes, tags, etc."></textarea>
+          </div>
+
+          <!-- ✅ Submit -->
+          <button type="submit" class="primary-btn bg-purple-accent text-white border-none px-1_5rem py-0_75rem rounded-md">
+            Upload
+          </button>
+        </form>
+      </section>
+
+      <!-- 📊 Dashboard -->
+      <section class="panel panel-dashboard flex-2 bg-purple-light rounded-lg p-2rem" aria-labelledby="closet-dashboard-heading">
+        <h2 id="closet-dashboard-heading" class="text-purple-dark">Closet Dashboard</h2>
+        <div id="closet-dashboard-root"></div>
+      </section>
+
+      <!-- 🧩 Category Manager -->
+      <section class="panel panel-card panel-categories flex-1 minw-300 bg-white rounded-lg p-2rem shadow-sm" aria-labelledby="closet-categories-heading">
+        <h3 id="closet-categories-heading" class="text-purple-dark">Manage Categories</h3>
+        <div class="categories-grid flex-col gap-1rem">
+          <div class="form-group">
+            <label for="closet-cat-input">Main Category</label>
+            <input id="closet-cat-input" type="text" class="cat-input" placeholder="e.g. Tops" />
+          </div>
+          <div class="form-group">
+            <label for="closet-subcat-input">Subcategory</label>
+            <input id="closet-subcat-input" type="text" class="subcat-input" placeholder="e.g. Shirts" />
+          </div>
+          <div class="form-group">
+            <label for="closet-subsubcat-input">Sub-subcategory</label>
+            <input id="closet-subsubcat-input" type="text" class="subsubcat-input" placeholder="e.g. Button-up" />
+          </div>
+        </div>
+        <div class="cat-actions mt-1rem flex gap-0_5rem">
+          <button class="add-cat-btn bg-purple-accent text-white border-none px-1rem py-0_5rem rounded-md">➕ Add</button>
+          <button class="delete-cat-btn bg-purple-light text-purple-dark border-none px-1rem py-0_5rem rounded-md">🗑️ Delete</button>
+        </div>
+      </section>
+
+      <section class="panel" id="panel-closet" data-panel="closet">
+        <h2>👗 Closet</h2>
+        <p>Closet panel content goes here.</p>
+      </section>
+
+
+    </div>
+  </section>
+</main>

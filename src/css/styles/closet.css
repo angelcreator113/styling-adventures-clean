@@ -1,0 +1,153 @@
+/* ===========================
+   Closet Dashboard (right)
+   =========================== */
+
+.toolbar--closet {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  margin-bottom: .75rem;
+
+  /* Quality-of-life: keep filters visible while scrolling */
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: rgba(255,255,255,.75);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  padding: .35rem .5rem;
+  border-radius: 10px;
+  border: 1px solid #f0f0f0;
+}
+.toolbar--closet input[type="search"] {
+  flex: 1;
+  min-width: 220px;
+}
+
+.dashboard-grid {
+  --gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--gap);
+}
+
+.closet-card {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+.closet-card:hover {
+  transform: translateY(-2px);
+}
+
+.closet-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid #eee;
+
+  /* center image perfectly */
+  display: grid;
+  place-items: center;
+}
+.closet-thumb img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+.closet-thumb__placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #999;
+  font-size: 12px;
+}
+.closet-card:hover .closet-thumb {
+  border-color: #e0e0ff;
+  box-shadow: 0 4px 14px rgba(99,102,241,.08);
+}
+
+/* badges */
+.badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  color: #fff;
+  background: rgba(0,0,0,.65);
+}
+.badge--pub  { background: rgba(99,102,241,.9); }
+.badge--priv { background: rgba(107,114,128,.9); }
+
+.closet-meta .title { font-weight: 600; font-size: .95rem; cursor: text; }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+.chip  { font-size: 11px; padding: 2px 8px; border-radius: 999px; background: #f3f4f6; color: #374151; border: 1px solid #e5e7eb; }
+
+.closet-actions { display: flex; gap: .5rem; flex-wrap: wrap; }
+.tb-btn { font-size: .9rem; padding: .35rem .6rem; border-radius: 8px; border: 1px solid #e5e7eb; background: #fff; }
+.tb-btn:hover { background: #f9f9fb; }
+.tb-btn.danger { color: #b91c1c; border-color: #fca5a5; background: #fff5f5; }
+.tb-btn.danger:hover { background: #ffe9e9; }
+.tb-select { min-width: 140px; }
+
+/* rename mode */
+.rename-wrap { display: flex; flex-direction: column; gap: .4rem; }
+.rename-input { width: 100%; padding: .45rem .6rem; border-radius: 8px; border: 1px solid #e5e7eb; }
+.rename-actions { display: flex; gap: .4rem; }
+.ideas-pop { margin-top: .25rem; display: flex; gap: .25rem; flex-wrap: wrap; }
+.ideas-pop .idea { border: 1px dashed #d1d5db; background: #fbfbff; border-radius: 999px; padding: .2rem .6rem; font-size: .85rem; }
+.ideas-pop .idea:hover { background: #f0f0ff; }
+
+/* skeletons */
+.closet-card.is-skel .skel-box {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 10px;
+  background: linear-gradient(90deg,#eee 25%,#f5f5f5 37%,#eee 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.1s infinite linear;
+}
+.closet-card.is-skel .skel-line { height: 12px; margin-top: 8px; border-radius: 6px; background: #eee; }
+.closet-card.is-skel .skel-line.short { width: 60%; }
+@keyframes shimmer { 0% { background-position: 100% 0 } 100% { background-position: 0 0 } }
+
+.empty { padding: 1.25rem; color: #6b7280; }
+
+/* ===========================
+   Upload panel (left preview)
+   =========================== */
+
+/* Matches the preview produced by useUploadPanel renderPreview() */
+#closet-file-list .file-thumb,
+.file-card .file-thumb {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  background-color: #fff;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: 10px;
+}
+
+/* Progress bar goes green when ready */
+#closet-progress[data-mode="ready"],
+progress[data-mode="ready"] {
+  accent-color: #22c55e;
+}
+progress[data-mode="ready"]::-webkit-progress-value {
+  background-color: #22c55e;
+}

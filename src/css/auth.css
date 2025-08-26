@@ -1,0 +1,352 @@
+/* ============================== */
+/* 🌈 Theme Variables */
+/* ============================== */
+:root {
+  --bg: #fff;
+  --text: #333;
+  --input-bg: #fff;
+  --input-border: #ddd;
+  --accent: #a88fff;
+  --accent-hover: #8a6be4;
+  --toast-success: #d0f0d8;
+  --toast-error: #ffcccb;
+  --toast-text-success: #1b5e20;
+  --toast-text-error: #b00020;
+  --error: #ff6b6b;
+  --radius: 12px;
+  --shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+  --bg: #181818;
+  --text: #f0f0f0;
+  --input-bg: #222;
+  --input-border: #555;
+  --accent: #7e57c2;
+  --accent-hover: #9c6fff;
+  --toast-success: #2e7d32;
+  --toast-error: #b71c1c;
+  --toast-text-success: #c8e6c9;
+  --toast-text-error: #ffcdd2;
+}
+
+/* ============================== */
+/* 🧼 Global Reset & Base */
+/* ============================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(180deg, #fbeaff 0%, #f6f0ff 100%);
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+/* ============================== */
+/* 🎯 Auth Layout */
+/* ============================== */
+.auth-container,
+.login-box {
+  background: var(--bg);
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Unified typography */
+.auth-container h1,
+.login-box h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--accent);
+}
+
+/* ============================== */
+/* 🖊 Input Styles */
+/* ============================== */
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 1rem;
+  border: 1px solid var(--input-border);
+  background-color: var(--input-bg);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  color: var(--text);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(168, 143, 255, 0.2);
+}
+
+/* 🔓 Validation */
+input.invalid {
+  border: 2px solid var(--error);
+  background-color: #fff5f5;
+}
+
+input:focus.invalid {
+  box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.3);
+}
+
+.input-error,
+.error {
+  color: var(--error);
+  font-size: 0.9rem;
+  margin-top: -0.5rem;
+  margin-bottom: 0.75rem;
+  text-align: left;
+}
+
+#login-error {
+  display: none;
+  color: #e53935;
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+}
+
+/* ============================== */
+/* 👁️ Password Wrapper */
+/* ============================== */
+.password-input-wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius);
+  background-color: var(--input-bg);
+  padding: 0 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.password-input-wrapper input {
+  flex: 1;
+  padding: 12px 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.password-input-wrapper input::placeholder {
+  color: #aaa;
+}
+
+.toggle-password {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-password:hover {
+  color: var(--accent-hover);
+}
+/* ============================== */
+/* 🔘 Buttons */
+/* ============================== */
+button,
+.auth-container button,
+.login-button {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 1rem;
+}
+
+button:hover,
+.login-button:hover {
+  background-color: var(--accent-hover);
+}
+
+button:disabled {
+  background-color: #c2c2c2;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* ============================== */
+/* 🧁 Auth Footer & Text */
+/* ============================== */
+.auth-footer,
+.create-account-text {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.auth-footer a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* ============================== */
+/* 🔔 Toasts */
+/* ============================== */
+#toast-container {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+}
+
+.toast {
+  padding: 0.8rem 1.2rem;
+  background: var(--toast-success);
+  color: var(--toast-text-success);
+  border-radius: 6px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: opacity 0.3s ease;
+}
+
+.toast.error {
+  background: var(--toast-error);
+  color: var(--toast-text-error);
+}
+
+.toast.fade-out {
+  opacity: 0;
+}
+
+/* ============================== */
+/* 📱 Responsive */
+/* ============================== */
+@media (max-width: 480px) {
+  .auth-container,
+  .login-box {
+    width: 90%;
+    padding: 1.5rem;
+  }
+
+  .auth-logo {
+    width: 90px;
+    margin-bottom: 1rem;
+  }
+
+  h1, h2 {
+    font-size: 1.4rem;
+  }
+
+  input,
+  button {
+    font-size: 1rem;
+  }
+
+  .toggle-password {
+    font-size: 1rem;
+    padding: 4px;
+  }
+}
+/* ============================== */
+/* 🛠 Password Toggle Fix */
+/* ============================== */
+.toggle-password {
+  width: auto !important;
+  height: auto !important;
+  background: transparent !important;
+  color: #a855f7;
+  padding: 0 !important;
+  border: none !important;
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: none !important;
+}
+
+.toggle-password:hover {
+  background: none !important;
+  color: #9333ea;
+}
+
+.password-input-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.password-input-wrapper input {
+  margin-bottom: 0;
+}
+
+/* ensure login button sits lower */
+.login-button {
+  margin-top: 20px;
+}
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  min-height: 80vh;
+  background-color: var(--lavender);
+}
+
+.auth-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow-2);
+  max-width: 400px;
+  width: 100%;
+}
+
+.auth-input {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--purple-light);
+}
+
+.auth-button {
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.auth-error {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 1rem;
+}
+
+.auth-link {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.auth-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 1rem;
+}

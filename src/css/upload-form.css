@@ -1,0 +1,110 @@
+/* ---------- Upload Panel Base ---------- */
+.upload-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+/* ---------- Form Elements ---------- */
+.upload-panel input[type="file"],
+.upload-panel input[type="text"],
+.upload-panel select,
+.upload-panel button {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-base);
+  font-size: 0.95rem;
+}
+
+.upload-panel button {
+  background-color: var(--purple-accent);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border: none;
+}
+
+.upload-panel button:hover {
+  background-color: #7c3aed;
+}
+
+/* ---------- Drag & Drop Area ---------- */
+.drop-area {
+  border: 2px dashed var(--border-base);
+  border-radius: 10px;
+  padding: 1.25rem;
+  text-align: center;
+  background-color: var(--bg-light);
+  color: var(--purple-dark);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.drop-area.drag-over {
+  border-color: #6b21a8;
+  background-color: #f3e8ff;
+}
+
+/* ---------- Form Sections ---------- */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* ---------- Category Dropdowns ---------- */
+.smart-dropdown {
+  appearance: none;
+  padding-right: 1.5rem;
+  background-image: url("/assets/lala-avatar.png");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+}
+
+/* ---------- Category Management ---------- */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+}
+
+.cat-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.add-cat-btn,
+.delete-cat-btn {
+  background-color: var(--purple-accent);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.delete-cat-btn {
+  background-color: #ddd6fe;
+  color: var(--purple-dark);
+}
+
+/* ---------- Accessibility ---------- */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+  border: 0;
+}

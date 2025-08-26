@@ -1,0 +1,117 @@
+/* dashboard.css — normalized to theme tokens */
+
+.dashboard {
+  display: grid;
+  gap: 16px;
+}
+
+/* Header row: title + filters + actions */
+.dashboard-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 12px;
+  justify-content: space-between;
+}
+.dashboard-title {
+  margin: 0;
+  font-size: clamp(20px, 2.2vw, 26px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.dashboard-actions { display: inline-flex; gap: 8px; }
+
+/* Filters */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--surface-muted);
+  color: var(--text-color);
+  box-shadow: var(--shadow-sm);
+}
+.filter-chip.active {
+  background: var(--purple-accent);
+  color: #fff;
+}
+
+/* Grid */
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 14px;
+}
+.card { grid-column: span 4; }
+.card--wide { grid-column: span 6; }
+.card--full { grid-column: 1 / -1; }
+
+@media (max-width: 1200px) {
+  .card { grid-column: span 6; }
+  .card--wide { grid-column: span 12; }
+}
+@media (max-width: 740px) {
+  .grid-cards { grid-template-columns: 1fr; }
+  .card, .card--wide, .card--full { grid-column: 1; }
+}
+
+/* Table scaffolding (if used inside cards) */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table th, .table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(76, 29, 149, 0.06);
+}
+.table th { color: var(--muted); font-weight: 600; }
+
+/* Empty states */
+.empty {
+  text-align: center;
+  color: var(--muted);
+  padding: 24px;
+}
+/* --- Just In carousel --- */
+.carousel-row {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 6px 2px 2px;
+  scroll-snap-type: x mandatory;
+}
+.carousel-row::-webkit-scrollbar { height: 8px; }
+.carousel-row::-webkit-scrollbar-thumb {
+  background: rgba(76,29,149,.18);
+  border-radius: 8px;
+}
+
+.carousel-item {
+  flex: 0 0 auto;
+  width: 160px;
+  border: 1px solid rgba(76,29,149,.08);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+  scroll-snap-align: start;
+}
+.carousel-item img {
+  display: block;
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
+}
+.carousel-label {
+  display: block;
+  font-size: 12px;
+  padding: 6px 8px 8px;
+  color: var(--muted);
+}

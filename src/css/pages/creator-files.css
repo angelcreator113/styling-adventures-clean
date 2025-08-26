@@ -1,0 +1,118 @@
+/* src/css/pages/creator-files.css */
+
+.space-wrap {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 360px 1fr;
+}
+
+.space-card {
+  border-radius: 14px;
+}
+
+.space-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.space-chip {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #f1efff;
+  color: #5b21b6;
+  border: 1px solid #e9e6ff;
+}
+
+.space-select-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.dropzone {
+  margin-top: 12px;
+  border-radius: 14px;
+  background: #fbf9ff;
+  border: 2px dashed #e5d9ff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  height: 190px;
+  transition: border-color .15s ease, background .15s ease, transform .06s ease-in-out;
+}
+.dropzone:hover { border-color: #c4b5fd; background: #f7f2ff; }
+.dropzone.is-hover { border-color: #a78bfa; background: #f5efff; }
+
+.dropzone__inner {
+  text-align: center;
+  color: #6b21a8;
+}
+.dropzone__title {
+  font-weight: 700;
+}
+.dropzone__sub {
+  color: #7c7c90;
+  font-size: 12px;
+}
+
+.group-row {
+  display: grid;
+  gap: 10px;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.count-pill {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.grid-cards {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
+
+.item-card {
+  padding: 8px;
+  transition: transform .08s ease, box-shadow .12s ease;
+}
+.item-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(2, 8, 23, .06);
+}
+
+.item-thumb {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 12px;
+  border: 1px solid #eee;
+  background-color: #fff;
+  background-size: cover;
+  background-position: center;
+}
+
+.item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+.item-title {
+  font-weight: 600;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.btn.block { width: 100%; }

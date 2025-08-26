@@ -1,0 +1,104 @@
+<!-- episode-panel.html -->
+<link rel="stylesheet" href="css/theme.css" />
+<link rel="stylesheet" href="css/panel.css" />
+<link rel="stylesheet" href="css/forms-and-filters.css" />
+<link rel="stylesheet" href="css/upload-form.css" />
+<link rel="stylesheet" href="css/category-manager.css" />
+<link rel="stylesheet" href="css/closet-panel.css" />
+<link rel="stylesheet" href="css/utility.css" />
+
+<main>
+  <section id="episodes-panel" class="panel" role="tabpanel" aria-labelledby="episodes-tab">
+    <div class="panel-grid flex-wrap gap-2rem p-2rem bg-lavender">
+
+      <!-- Upload Card -->
+      <section class="panel panel-card flex-1 minw-300 bg-white rounded-lg p-2rem shadow-sm" aria-labelledby="episodes-panel-heading">
+        <h2 id="episodes-panel-heading" class="text-purple-dark">Episode Upload</h2>
+
+        <form id="episode-upload-form" class="upload-panel flex-col gap-1rem">
+          <div class="form-group">
+            <label for="episode-file-input" class="visually-hidden">Upload episode video</label>
+            <div id="episode-drop-area" class="drop-area text-center cursor-pointer border-dashed border-purple-light p-2rem rounded-xl">
+              <img src="assets/icons/upload-icon.svg" alt="Upload icon" width="32" height="32" />
+              <input type="file" id="episode-file-input" accept="video/*" class="hidden" />
+              <p class="text-purple-accent">Drop or choose a file…</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>
+              <input type="checkbox" id="episode-is-public" />
+              Make public
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label for="episode-category">Category</label>
+            <select id="episode-category" class="smart-dropdown" required></select>
+          </div>
+
+          <div class="form-group">
+            <label for="episode-subcategory">Subcategory</label>
+            <select id="episode-subcategory" class="smart-dropdown"></select>
+          </div>
+
+          <div class="form-group">
+            <label for="episode-subsubcategory">Sub-subcategory (optional)</label>
+            <select id="episode-subsubcategory" class="smart-dropdown"></select>
+          </div>
+
+          <div class="form-group">
+            <label for="episode-title">Title (optional)</label>
+            <input id="episode-title" type="text" placeholder="e.g. Episode 2 – Scene A" />
+          </div>
+
+          <div class="form-group">
+            <label for="episode-notes">Notes (optional)</label>
+            <textarea id="episode-notes" rows="3" placeholder="Context, summary, keywords…"></textarea>
+          </div>
+
+          <button type="submit" class="primary-btn bg-purple-accent text-white border-none px-1_5rem py-0_75rem rounded-md">
+            Upload
+          </button>
+        </form>
+      </section>
+
+      <!-- Dashboard -->
+      <section class="panel panel-dashboard flex-2 bg-purple-light rounded-lg p-2rem" aria-labelledby="episodes-dashboard-heading">
+        <h2 id="episodes-dashboard-heading" class="text-purple-dark">Episode Dashboard</h2>
+        <div id="episodes-dashboard-root"></div>
+      </section>
+
+
+      <!-- Category Manager -->
+      <section class="panel panel-card panel-categories flex-1 minw-300 bg-white rounded-lg p-2rem shadow-sm" aria-labelledby="episodes-categories-heading">
+        <h3 id="episodes-categories-heading" class="text-purple-dark">Manage Categories</h3>
+        <div class="categories-grid flex-col gap-1rem">
+          <div class="form-group">
+            <label for="episodes-cat-input">Main Category</label>
+            <input id="episodes-cat-input" type="text" class="cat-input" placeholder="e.g. Season 1" />
+          </div>
+          <div class="form-group">
+            <label for="episodes-subcat-input">Subcategory</label>
+            <input id="episodes-subcat-input" type="text" class="subcat-input" placeholder="e.g. Episode 2" />
+          </div>
+          <div class="form-group">
+            <label for="episodes-subsubcat-input">Sub-subcategory</label>
+            <input id="episodes-subsubcat-input" type="text" class="subsubcat-input" placeholder="e.g. Scene A" />
+          </div>
+        </div>
+        <section class="panel" id="panel-episodes" data-panel="episodes">
+          <h2>🎬 Episodes</h2>
+          <p>Episodes panel content goes here.</p>
+        </section>
+
+
+        <div class="cat-actions mt-1rem flex gap-0_5rem">
+          <button class="add-cat-btn bg-purple-accent text-white border-none px-1rem py-0_5rem rounded-md">➕ Add</button>
+          <button class="delete-cat-btn bg-purple-light text-purple-dark border-none px-1rem py-0_5rem rounded-md">🗑️ Delete</button>
+        </div>
+      </section>
+
+    </div>
+  </section>
+</main>

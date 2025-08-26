@@ -1,0 +1,4 @@
+.env
+*.local
+firebase-service-account.json
+Stop tracking zip archives; ignore *.zip

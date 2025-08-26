@@ -1,0 +1,57 @@
+/* logout-modal.css */
+
+.logout-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.logout-modal-content {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.logout-modal-title {
+  font-size: 1.2rem;
+  color: #39104a;
+  margin-bottom: 1.5rem;
+}
+
+.logout-modal-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.button-confirm {
+  background-color: #7e22ce;
+  color: white;
+}
+
+.button-cancel {
+  background-color: #f3f4f6;
+  color: #4b5563;
+}
+
+.button-confirm:hover {
+  background-color: #6b21a8;
+}
+
+.button-cancel:hover {
+  background-color: #e5e7eb;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

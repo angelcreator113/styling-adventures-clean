@@ -1,0 +1,159 @@
+@import "../tokens/theme.css";
+
+/* =============== COMMON UI PIECES =============== */
+
+/* Cards */
+.card { background: var(--surface); border:1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }
+.card.wide { display:grid; gap:0; grid-template-columns: 1.6fr 1fr; }
+.card__thumb { aspect-ratio: 4/5; background: var(--bg-soft); border-bottom:1px solid var(--border); display:grid; place-items:center; }
+.card__thumb img { width:100%; height:100%; object-fit: cover; }
+.card__body { padding: 12px 14px; }
+
+/* Toolbar */
+.toolbar { display:flex; gap:.5rem; align-items:center; margin:.5rem 0; }
+.toolbar input[type="search"]{ min-width: 220px; }
+
+/* Pills / tags */
+.chips { display:flex; gap:6px; flex-wrap:wrap; }
+.chip--blue { background: color-mix(in srgb, var(--blue) 16%, #fff); border-color: color-mix(in srgb, var(--blue) 35%, #fff); }
+.badge--pub { background: rgba(99,102,241,.9); color:#fff; }
+.badge--priv{ background: rgba(107,114,128,.9); color:#fff; }
+
+/* Tables (optional) */
+.table { width:100%; border-collapse:separate; border-spacing:0 6px; }
+.table tr { background: var(--surface); }
+.table th,.table td { text-align:left; padding:.6rem .8rem; }
+.table th { font-size: var(--fs-xs); color: var(--ink-40); font-weight:700; }
+.table tr { border:1px solid var(--border); }
+.table tr td:first-child { border-top-left-radius:10px; border-bottom-left-radius:10px; }
+.table tr td:last-child  { border-top-right-radius:10px; border-bottom-right-radius:10px; }
+
+/* Dropzone */
+.drop-zone {
+  display:grid; place-items:center; text-align:center; color:var(--ink-60);
+  border:2px dashed color-mix(in srgb, var(--pink) 28%, var(--border));
+  border-radius: 14px; min-height: 120px; padding: 18px; background: var(--surface-2);
+}
+.drop-zone:hover { background: color-mix(in srgb, var(--lav-2) 60%, #fff); }
+
+/* Forms */
+.form-group { display:grid; gap:6px; margin-bottom: 10px; }
+.inline { display:flex; align-items:center; gap:.5rem; }
+.smart-dropdown { width:100%; }
+
+/* Buttons are in base.css; here are quick accents */
+.btn.sparkle {
+  background: linear-gradient(90deg, var(--gold), var(--pink));
+  color:#4a2b00; border:1px solid rgba(0,0,0,.06);
+}
+
+/* Closets / gallery cards */
+.closet-card { display:flex; flex-direction:column; gap:.5rem; }
+.closet-thumb { position:relative; width:100%; aspect-ratio: 3/4; overflow:hidden; border-radius:12px; background:#fafafa; border:1px solid var(--border); }
+.closet-thumb img { width:100%; height:100%; object-fit: contain; display:block; }
+
+/* Carousel row for image chips (Just In) */
+.carousel-row { display:flex; gap:10px; overflow:auto; padding: 4px 2px; }
+.carousel-item {
+  min-width: 120px; max-width: 140px;
+  background:#fff; border:1px solid var(--border); border-radius: 12px;
+  box-shadow: var(--shadow-sm); padding: 6px; position:relative;
+}
+.carousel-item img { width:100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 8px; }
+.carousel-label {
+  position:absolute; bottom:6px; left:6px;
+  backdrop-filter: blur(4px);
+  background: color-mix(in srgb, var(--blue) 18%, #fff);
+  border:1px solid color-mix(in srgb, var(--blue) 45%, #fff);
+  border-radius: 999px; padding:.15rem .5rem; font-size: var(--fs-xxs);
+}
+
+/* Empty state */
+.empty { padding: 1rem; border:1px dashed var(--border); border-radius: 12px; color: var(--ink-60); background: var(--surface-2); }
+
+/* Tiny icons (if you use any SVG font/ sprite) */
+.ico { width:1em; height:1em; display:inline-block; }
+/* ---------- Buttons ---------- */
+.btn {
+  --btn-bg: #fff;
+  --btn-fg: var(--ink-800);
+  --btn-bd: var(--line-soft);
+
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .55rem .9rem;
+  border-radius: 12px;
+  border: 1px solid var(--btn-bd);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-weight: 600;
+  line-height: 1;
+  transition: background .15s, box-shadow .15s, transform .06s;
+}
+.btn:hover { background: var(--lav-25); }
+.btn:active { transform: translateY(1px); }
+.btn:focus-visible { outline: 3px solid var(--blue-300); outline-offset: 2px; }
+
+/* Primary = Sky Blue (deeper for contrast) */
+.btn.primary {
+  --btn-bg: var(--blue-600);
+  --btn-fg: #0a223a;
+  --btn-bd: transparent;
+  color: var(--btn-fg);
+  background:
+    linear-gradient(180deg, var(--blue-500), var(--blue-600));
+  box-shadow:
+    inset 0 0 0 1px rgba(20,33,54,.08),
+    0 6px 14px rgba(14,98,149,.18);
+}
+.btn.primary:hover {
+  background: linear-gradient(180deg, var(--blue-500), var(--blue-700));
+}
+
+/* Ghost button */
+.btn.ghost {
+  --btn-bg: #fff;
+  --btn-fg: var(--blue-700);
+  --btn-bd: var(--blue-200);
+}
+.btn.ghost:hover { background: var(--blue-25); }
+
+/* Danger */
+.btn.danger {
+  --btn-bg: #fff5f5;
+  --btn-fg: #b91c1c;
+  --btn-bd: #fecaca;
+}
+
+/* Small */
+.btn.sm { padding: .4rem .7rem; border-radius: 10px; font-size: .9rem; }
+
+/* ---------- Chips / Badges ---------- */
+.chip {
+  display: inline-flex; align-items: center; gap: .35rem;
+  padding: .18rem .6rem;
+  border-radius: 999px;
+  font-size: .78rem;
+  border: 1px solid var(--line-soft);
+  background: #fff;
+  color: var(--ink-700);
+}
+.badge--pub { background: var(--pink-500); color: #fff; }
+.badge--priv { background: var(--ink-500); color: #fff; }
+.cam-modal { position: fixed; inset: 0; z-index: 1200; display:grid; place-items:center; }
+.cam-backdrop { position:absolute; inset:0; background: rgba(0,0,0,.4); backdrop-filter: blur(4px); }
+.cam-sheet {
+  position: relative; width: min(680px, 92vw); background: var(--panel); border:1px solid var(--border);
+  border-radius: 16px; box-shadow: var(--shadow-2); padding: 14px; display:flex; flex-direction:column; gap:12px;
+}
+.cam-hd { font-weight: 700; }
+.cam-preview { position:relative; border-radius: 12px; overflow:hidden; background: #000; }
+.cam-preview video, .cam-preview canvas { width: 100%; display:block; }
+.cam-actions { display:flex; gap:8px; justify-content:flex-end; }
+/* upload options */
+.card-ish{border:1px solid var(--border);border-radius:12px;padding:10px;background:var(--panel)}
+.uopts-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.uopt{display:flex;gap:.6rem;align-items:start;padding:8px;border-radius:10px;background:var(--bg-soft);border:1px dashed var(--border)}
+.uopt input{margin-top:.2rem}
+.uopt-title{font-weight:700;display:block}
+.uopt-help{display:block;font-size:.85rem;opacity:.7;line-height:1.25}
+

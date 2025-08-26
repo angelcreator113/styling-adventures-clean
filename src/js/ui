@@ -1,0 +1,12 @@
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import Topbar from '../../components/Topbar.jsx';
+
+export function mountTopbar(selector = '#app-topbar') {
+  const target = document.querySelector(selector);
+  if (target) {
+    ReactDOM.createRoot(target).render(<Topbar />);
+  } else {
+    console.warn(`[mountTopbar] No element found for ${selector}`);
+  }
+}
